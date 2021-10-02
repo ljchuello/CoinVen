@@ -1,0 +1,19 @@
+@import "~@angular/material/theming";
+// https://medium.com/@treviergits/angular-material-theme-color-options-7d5968cb7460
+@include mat-core();
+//noinspection SassScssUnresolvedVariable
+$angular-primary: mat-palette($mat-blue);
+//noinspection SassScssUnresolvedVariable
+$angular-accent: mat-palette($mat-teal);
+//noinspection SassScssUnresolvedVariable
+$angular-warn: mat-palette($mat-deep-orange);
+$angular-default-theme: mat-dark-theme(
+    (
+      color: (
+        primary: $angular-primary,
+        accent: $angular-accent,
+        warn: $angular-warn,
+      ),
+    )
+);
+@include angular-material-theme($angular-default-theme);
