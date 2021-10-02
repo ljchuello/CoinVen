@@ -1,0 +1,5 @@
+https://www.npmjs.com/package/ng-openapi-gen
+npm install -g ng-openapi-gen
+ng-openapi-gen --input https://api-dpsos-dev.entecprois.com/swagger/v1/swagger.json --output src/app/api
+
+ng-openapi-gen --input https://www.coingecko.com/api/documentations/v3/swagger.json --output src/app/api

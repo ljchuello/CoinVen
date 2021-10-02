@@ -1,0 +1,16 @@
+export { PingService } from './services/ping.service';
+export { SimpleService } from './services/simple.service';
+export { CoinsService } from './services/coins.service';
+export { ContractService } from './services/contract.service';
+export { AssetPlatformsService } from './services/asset-platforms.service';
+export { CategoriesService } from './services/categories.service';
+export { ExchangesService } from './services/exchanges.service';
+export { FinanceService } from './services/finance.service';
+export { IndexesService } from './services/indexes.service';
+export { DerivativesService } from './services/derivatives.service';
+export { StatusUpdatesService } from './services/status-updates.service';
+export { EventsService } from './services/events.service';
+export { ExchangeRatesService } from './services/exchange-rates.service';
+export { TrendingService } from './services/trending.service';
+export { GlobalService } from './services/global.service';
+export { CompaniesBetaService } from './services/companies-beta.service';
