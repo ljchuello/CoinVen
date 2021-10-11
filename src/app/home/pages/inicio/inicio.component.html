@@ -1,0 +1,12 @@
+<p *ngIf="btc != null">
+  <img class="responsive-img" [src]="btc.image.large" [alt]="btc.symbol" style="max-height: 50px">
+  Precio: ${{btc.market_data.current_price.usd | number:'1.2-2'}}
+</p>
+<p *ngIf="bnb != null">
+  <img class="responsive-img" [src]="bnb.image.large" [alt]="bnb.symbol" style="max-height: 50px">
+  Precio: ${{bnb.market_data.current_price.usd | number:'1.2-2'}}
+</p>
+<p *ngIf="ltc != null">
+  <img class="responsive-img" [src]="ltc.image.large" [alt]="ltc.symbol" style="max-height: 50px">
+  Precio: ${{ltc.market_data.current_price.usd | number:'1.2-2'}}
+</p>
