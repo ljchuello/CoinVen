@@ -36,19 +36,44 @@ export class InicioComponent implements OnInit {
     this.bnb = taskResult[1];
     this.ltc = taskResult[2];
 
-    this.btc_Value = 1;
-    this.btc_Usd = this.btc.market_data.current_price.usd;
+    this.btc_Value = this.Round(1, 8);
+    this.btc_Usd = this.Round(this.btc.market_data.current_price.usd, 2);
 
   }
 
   btcToUsd() {
     try {
+      this.btc_Usd = this.btc_Value * this.btc.market_data.current_price.usd;
 
-      this.btc_Usd = this.btc_Value;
+      if (isNaN(this.btc_Usd)) {
+        this.btc_Value = 1;
+        this.btc_Usd = this.btc.market_data.current_price.usd;
+      }
     } catch (err) {
-      // this.btc_Usd = 1;
-      // this.btc_Value =
+      this.btc_Value = 1;
+      this.btc_Usd = this.btc.market_data.current_price.usd;
+    } finally {
+      this.btc_Usd = this.Round(this.btc_Usd, 2);
     }
-
   }
+
+  usdToBtc() {
+    try {
+      this.btc_Value = this.btc_Usd / this.btc.market_data.current_price.usd;
+      if (isNaN(this.btc_Usd) || isNaN(this.btc_Value)) {
+        this.btc_Value = 1;
+        this.btc_Usd = this.btc.market_data.current_price.usd;
+      }
+    } catch (err) {
+      this.btc_Value = 1;
+      this.btc_Usd = this.btc.market_data.current_price.usd;
+    } finally {
+      this.btc_Value = this.Round(this.btc_Value, 8);
+    }
+  }
+
+  Round(num: number, places: number) {
+    let factor = 10 ** places;
+    return Math.round(num * factor) / factor;
+  };
 }
