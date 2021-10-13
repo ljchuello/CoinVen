@@ -14,6 +14,10 @@ export class InicioComponent implements OnInit {
   bnb!: Coin;
   ltc!: Coin;
 
+  btc_Value: number = 0;
+  btc_Usd: number = 0;
+
+
   constructor(
     private coinService: CoinService
   ) {
@@ -32,6 +36,19 @@ export class InicioComponent implements OnInit {
     this.bnb = taskResult[1];
     this.ltc = taskResult[2];
 
+    this.btc_Value = 1;
+    this.btc_Usd = this.btc.market_data.current_price.usd;
+
   }
 
+  btcToUsd() {
+    try {
+
+      this.btc_Usd = this.btc_Value;
+    } catch (err) {
+      // this.btc_Usd = 1;
+      // this.btc_Value =
+    }
+
+  }
 }

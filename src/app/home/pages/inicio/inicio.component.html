@@ -1,12 +1,43 @@
-<p *ngIf="btc != null">
-  <img class="responsive-img" [src]="btc.image.large" [alt]="btc.symbol" style="max-height: 50px">
-  Precio: ${{btc.market_data.current_price.usd | number:'1.2-2'}}
-</p>
-<p *ngIf="bnb != null">
-  <img class="responsive-img" [src]="bnb.image.large" [alt]="bnb.symbol" style="max-height: 50px">
-  Precio: ${{bnb.market_data.current_price.usd | number:'1.2-2'}}
-</p>
-<p *ngIf="ltc != null">
-  <img class="responsive-img" [src]="ltc.image.large" [alt]="ltc.symbol" style="max-height: 50px">
-  Precio: ${{ltc.market_data.current_price.usd | number:'1.2-2'}}
-</p>
+<div class="row padding5">
+
+  <mat-card *ngIf="btc != null" class="example-card col s12 m6 l4">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image padding5">
+        <img [src]="btc.image.large" alt="" class="mat-card-avatar example-header-image">
+      </div>
+      <mat-card-title style="padding-top: 5px">
+        {{btc.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{btc.symbol}} 1 ≠ US$ {{btc.market_data.current_price.usd | number:'1.2-2'}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <hr>
+    <mat-card-content class="padding5">
+
+      <mat-form-field appearance="outline" class="col s6">
+        <mat-label>{{btc.symbol}}</mat-label>
+        <input [(ngModel)]="btc_Value" (keypress)="btcToUsd()" matInput placeholder="Placeholder">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col s6">
+        <mat-label>US$</mat-label>
+        <input [(ngModel)]="btc_Usd" matInput placeholder="Placeholder">
+      </mat-form-field>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>
+<!--<p *ngIf="btc != null">-->
+<!--  <img class="responsive-img" [src]="btc.image.large" [alt]="btc.symbol" style="max-height: 50px">-->
+<!--  Precio: ${{btc.market_data.current_price.usd | number:'1.2-2'}}-->
+<!--</p>-->
+<!--<p *ngIf="bnb != null">-->
+<!--  <img class="responsive-img" [src]="bnb.image.large" [alt]="bnb.symbol" style="max-height: 50px">-->
+<!--  Precio: ${{bnb.market_data.current_price.usd | number:'1.2-2'}}-->
+<!--</p>-->
+<!--<p *ngIf="ltc != null">-->
+<!--  <img class="responsive-img" [src]="ltc.image.large" [alt]="ltc.symbol" style="max-height: 50px">-->
+<!--  Precio: ${{ltc.market_data.current_price.usd | number:'1.2-2'}}-->
+<!--</p>-->
