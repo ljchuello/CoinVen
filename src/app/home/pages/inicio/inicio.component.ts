@@ -17,6 +17,12 @@ export class InicioComponent implements OnInit {
   btc_Value: number = 0;
   btc_Usd: number = 0;
 
+  bnb_Value: number = 0;
+  bnb_Usd: number = 0;
+
+  ltc_Value: number = 0;
+  ltc_Usd: number = 0;
+
 
   constructor(
     private coinService: CoinService
@@ -37,7 +43,13 @@ export class InicioComponent implements OnInit {
     this.ltc = taskResult[2];
 
     this.btc_Value = this.Round(1, 8);
-    this.btc_Usd = this.Round(this.btc.market_data.current_price.usd, 2);
+    this.btc_Usd = this.Round(this.bnb.market_data.current_price.usd, 2);
+
+    this.bnb_Value = this.Round(1, 8);
+    this.bnb_Usd = this.Round(this.bnb.market_data.current_price.usd, 2);
+
+    this.ltc_Value = this.Round(1, 8);
+    this.ltc_Usd = this.Round(this.ltc.market_data.current_price.usd, 2);
 
   }
 
@@ -69,6 +81,72 @@ export class InicioComponent implements OnInit {
       this.btc_Usd = this.btc.market_data.current_price.usd;
     } finally {
       this.btc_Value = this.Round(this.btc_Value, 8);
+    }
+  }
+
+  //
+
+  bnbToUsd() {
+    try {
+      this.bnb_Usd = this.bnb_Value * this.bnb.market_data.current_price.usd;
+
+      if (isNaN(this.bnb_Usd)) {
+        this.bnb_Value = 1;
+        this.bnb_Usd = this.bnb.market_data.current_price.usd;
+      }
+    } catch (err) {
+      this.bnb_Value = 1;
+      this.bnb_Usd = this.bnb.market_data.current_price.usd;
+    } finally {
+      this.bnb_Usd = this.Round(this.bnb_Usd, 2);
+    }
+  }
+
+  usdToBnb() {
+    try {
+      this.bnb_Value = this.bnb_Usd / this.bnb.market_data.current_price.usd;
+      if (isNaN(this.bnb_Usd) || isNaN(this.bnb_Value)) {
+        this.bnb_Value = 1;
+        this.bnb_Usd = this.bnb.market_data.current_price.usd;
+      }
+    } catch (err) {
+      this.bnb_Value = 1;
+      this.bnb_Usd = this.bnb.market_data.current_price.usd;
+    } finally {
+      this.bnb_Value = this.Round(this.bnb_Value, 8);
+    }
+  }
+
+  //
+
+  ltcToUsd() {
+    try {
+      this.ltc_Usd = this.ltc_Value * this.ltc.market_data.current_price.usd;
+
+      if (isNaN(this.ltc_Usd)) {
+        this.ltc_Value = 1;
+        this.ltc_Usd = this.ltc.market_data.current_price.usd;
+      }
+    } catch (err) {
+      this.ltc_Value = 1;
+      this.ltc_Usd = this.ltc.market_data.current_price.usd;
+    } finally {
+      this.ltc_Usd = this.Round(this.ltc_Usd, 2);
+    }
+  }
+
+  usdToLtc() {
+    try {
+      this.ltc_Value = this.ltc_Usd / this.ltc.market_data.current_price.usd;
+      if (isNaN(this.ltc_Usd) || isNaN(this.ltc_Value)) {
+        this.ltc_Value = 1;
+        this.ltc_Usd = this.ltc.market_data.current_price.usd;
+      }
+    } catch (err) {
+      this.ltc_Value = 1;
+      this.ltc_Usd = this.ltc.market_data.current_price.usd;
+    } finally {
+      this.ltc_Value = this.Round(this.ltc_Value, 8);
     }
   }
 
