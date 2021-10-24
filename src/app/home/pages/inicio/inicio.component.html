@@ -3,7 +3,7 @@
   <div *ngIf="btc != null" class="col s12 m6 l4">
     <mat-card class="example-card col s12">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image padding5">
+        <div mat-card-avatar class="example-header-image" style="padding: 5px !important;">
           <img [src]="btc.image.large" alt="" class="mat-card-avatar example-header-image">
         </div>
         <mat-card-title style="padding-top: 5px">
@@ -18,19 +18,21 @@
 
         <mat-form-field appearance="outline" class="col s6">
           <mat-label>{{btc.symbol}}</mat-label>
-          <input [(ngModel)]="btc_Value" (keyup)="btcToUsd()" matInput type="number">
+          <input [(ngModel)]="btc_Value" (keyup)="btcToUsd()" matInput type="text" mask="separator.8"
+                 thousandSeparator=",">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="col s6">
           <mat-label>US$</mat-label>
-          <input [(ngModel)]="btc_Usd" (keyup)="usdToBtc()" matInput type="number">
+          <input [(ngModel)]="btc_Usd" (keyup)="usdToBtc()" matInput type="text" mask="separator.2"
+                 thousandSeparator=",">
         </mat-form-field>
 
       </mat-card-content>
     </mat-card>
   </div>
 
-  <div *ngIf="bnb != null" class="col s12 m6 l4 padding5">
+  <div *ngIf="bnb != null" class="col s12 m6 l4" style="padding: 5px !important;">
     <mat-card class="example-card col s12">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image padding5">
@@ -48,19 +50,21 @@
 
         <mat-form-field appearance="outline" class="col s6">
           <mat-label>{{bnb.symbol}}</mat-label>
-          <input [(ngModel)]="bnb_Value" (keyup)="bnbToUsd()" matInput type="number">
+          <input [(ngModel)]="bnb_Value" (keyup)="bnbToUsd()" matInput type="text" mask="separator.8"
+                 thousandSeparator=",">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="col s6">
           <mat-label>US$</mat-label>
-          <input [(ngModel)]="bnb_Usd" (keyup)="usdToBnb()" matInput type="number">
+          <input [(ngModel)]="bnb_Usd" (keyup)="usdToBnb()" matInput type="text" mask="separator.2"
+                 thousandSeparator=",">
         </mat-form-field>
 
       </mat-card-content>
     </mat-card>
   </div>
 
-  <div *ngIf="ltc != null" class="col s12 m6 l4 padding5">
+  <div *ngIf="ltc != null" class="col s12 m6 l4" style="padding: 5px !important;">
     <mat-card class="example-card col s12">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image padding5">
@@ -78,28 +82,24 @@
 
         <mat-form-field appearance="outline" class="col s6">
           <mat-label>{{ltc.symbol}}</mat-label>
-          <input [(ngModel)]="ltc_Value" (keyup)="ltcToUsd()" matInput type="number">
+          <input [(ngModel)]="ltc_Value" (keyup)="ltcToUsd()" matInput type="text" mask="separator.8"
+                 thousandSeparator=",">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="col s6">
           <mat-label>US$</mat-label>
-          <input [(ngModel)]="ltc_Usd" (keyup)="usdToLtc()" matInput type="number">
+          <input [(ngModel)]="ltc_Usd" (keyup)="usdToLtc()" matInput type="text" mask="separator.2"
+                 thousandSeparator=",">
         </mat-form-field>
 
       </mat-card-content>
     </mat-card>
   </div>
 
+  <div class="col s12">
+    <button mat-raised-button color="primary" (click)="load()">
+      Refrescar
+    </button>
+  </div>
+
 </div>
-<!--<p *ngIf="btc != null">-->
-<!--  <img class="responsive-img" [src]="btc.image.large" [alt]="btc.symbol" style="max-height: 50px">-->
-<!--  Precio: ${{btc.market_data.current_price.usd | number:'1.2-2'}}-->
-<!--</p>-->
-<!--<p *ngIf="bnb != null">-->
-<!--  <img class="responsive-img" [src]="bnb.image.large" [alt]="bnb.symbol" style="max-height: 50px">-->
-<!--  Precio: ${{bnb.market_data.current_price.usd | number:'1.2-2'}}-->
-<!--</p>-->
-<!--<p *ngIf="ltc != null">-->
-<!--  <img class="responsive-img" [src]="ltc.image.large" [alt]="ltc.symbol" style="max-height: 50px">-->
-<!--  Precio: ${{ltc.market_data.current_price.usd | number:'1.2-2'}}-->
-<!--</p>-->

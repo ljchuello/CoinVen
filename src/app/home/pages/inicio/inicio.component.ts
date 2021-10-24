@@ -30,7 +30,10 @@ export class InicioComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.load();
+  }
 
+  async load(): Promise<void> {
     let fork = forkJoin([
       this.coinService.CargarMoneda('bitcoin'),
       this.coinService.CargarMoneda('binancecoin'),
@@ -42,15 +45,14 @@ export class InicioComponent implements OnInit {
     this.bnb = taskResult[1];
     this.ltc = taskResult[2];
 
-    this.btc_Value = this.Round(1, 8);
-    this.btc_Usd = this.Round(this.bnb.market_data.current_price.usd, 2);
+    this.btc_Value = 1;
+    this.btc_Usd = this.btc.tickers.find(x => x.target == 'USDT' && x.market.name == 'Binance')!.last;
 
-    this.bnb_Value = this.Round(1, 8);
-    this.bnb_Usd = this.Round(this.bnb.market_data.current_price.usd, 2);
+    this.bnb_Value = 1;
+    this.bnb_Usd = this.bnb.tickers.find(x => x.target == 'USDT' && x.market.name == 'Binance')!.last;
 
-    this.ltc_Value = this.Round(1, 8);
-    this.ltc_Usd = this.Round(this.ltc.market_data.current_price.usd, 2);
-
+    this.ltc_Value = 1;
+    this.ltc_Usd = this.ltc.tickers.find(x => x.target == 'USDT' && x.market.name == 'Binance')!.last;
   }
 
   btcToUsd() {
@@ -65,7 +67,6 @@ export class InicioComponent implements OnInit {
       this.btc_Value = 1;
       this.btc_Usd = this.btc.market_data.current_price.usd;
     } finally {
-      this.btc_Usd = this.Round(this.btc_Usd, 2);
     }
   }
 
@@ -80,7 +81,6 @@ export class InicioComponent implements OnInit {
       this.btc_Value = 1;
       this.btc_Usd = this.btc.market_data.current_price.usd;
     } finally {
-      this.btc_Value = this.Round(this.btc_Value, 8);
     }
   }
 
@@ -98,7 +98,6 @@ export class InicioComponent implements OnInit {
       this.bnb_Value = 1;
       this.bnb_Usd = this.bnb.market_data.current_price.usd;
     } finally {
-      this.bnb_Usd = this.Round(this.bnb_Usd, 2);
     }
   }
 
@@ -113,7 +112,6 @@ export class InicioComponent implements OnInit {
       this.bnb_Value = 1;
       this.bnb_Usd = this.bnb.market_data.current_price.usd;
     } finally {
-      this.bnb_Value = this.Round(this.bnb_Value, 8);
     }
   }
 
@@ -131,7 +129,6 @@ export class InicioComponent implements OnInit {
       this.ltc_Value = 1;
       this.ltc_Usd = this.ltc.market_data.current_price.usd;
     } finally {
-      this.ltc_Usd = this.Round(this.ltc_Usd, 2);
     }
   }
 
@@ -146,12 +143,6 @@ export class InicioComponent implements OnInit {
       this.ltc_Value = 1;
       this.ltc_Usd = this.ltc.market_data.current_price.usd;
     } finally {
-      this.ltc_Value = this.Round(this.ltc_Value, 8);
     }
   }
-
-  Round(num: number, places: number) {
-    let factor = 10 ** places;
-    return Math.round(num * factor) / factor;
-  };
 }
