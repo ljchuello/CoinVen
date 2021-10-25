@@ -13,6 +13,7 @@ export class InicioComponent implements OnInit {
   btc!: Coin;
   bnb!: Coin;
   ltc!: Coin;
+  eth!: Coin;
 
   btc_Value: number = 0;
   btc_Usd: number = 0;
@@ -22,6 +23,9 @@ export class InicioComponent implements OnInit {
 
   ltc_Value: number = 0;
   ltc_Usd: number = 0;
+
+  eth_Value: number = 0;
+  eth_Usd: number = 0;
 
 
   constructor(
@@ -37,13 +41,15 @@ export class InicioComponent implements OnInit {
     let fork = forkJoin([
       this.coinService.CargarMoneda('bitcoin'),
       this.coinService.CargarMoneda('binancecoin'),
-      this.coinService.CargarMoneda('litecoin')
+      this.coinService.CargarMoneda('litecoin'),
+      this.coinService.CargarMoneda('ethereum')
     ]);
 
     let taskResult = await fork.toPromise();
     this.btc = taskResult[0];
     this.bnb = taskResult[1];
     this.ltc = taskResult[2];
+    this.eth = taskResult[3];
 
     this.btc_Value = 1;
     this.btc_Usd = this.btc.tickers.find(x => x.target == 'USDT' && x.market.name == 'Binance')!.last;
@@ -53,6 +59,9 @@ export class InicioComponent implements OnInit {
 
     this.ltc_Value = 1;
     this.ltc_Usd = this.ltc.tickers.find(x => x.target == 'USDT' && x.market.name == 'Binance')!.last;
+
+    this.eth_Value = 1;
+    this.eth_Usd = this.eth.tickers.find(x => x.target == 'USDT' && x.market.name == 'Binance')!.last;
   }
 
   btcToUsd() {
@@ -145,4 +154,36 @@ export class InicioComponent implements OnInit {
     } finally {
     }
   }
+
+  //
+
+  ethToUsd() {
+    try {
+      this.eth_Usd = this.eth_Value * this.eth.market_data.current_price.usd;
+
+      if (isNaN(this.eth_Usd)) {
+        this.eth_Value = 1;
+        this.eth_Usd = this.eth.market_data.current_price.usd;
+      }
+    } catch (err) {
+      this.eth_Value = 1;
+      this.eth_Usd = this.eth.market_data.current_price.usd;
+    } finally {
+    }
+  }
+
+  usdToEth() {
+    try {
+      this.eth_Value = this.eth_Usd / this.eth.market_data.current_price.usd;
+      if (isNaN(this.eth_Usd) || isNaN(this.eth_Value)) {
+        this.eth_Value = 1;
+        this.eth_Usd = this.eth.market_data.current_price.usd;
+      }
+    } catch (err) {
+      this.eth_Value = 1;
+      this.eth_Usd = this.eth.market_data.current_price.usd;
+    } finally {
+    }
+  }
+
 }
